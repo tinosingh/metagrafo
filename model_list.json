@@ -1,0 +1,66 @@
+{
+  "last_scan": "2025-06-14 20:41:18",
+  "models": {
+    "t5-small": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--t5-small/snapshots/df1b051c49625cf57a3d0d8d3863ed4d13564fe4",
+      "type": "huggingface",
+      "last_modified": 1747889411.5682056
+    },
+    "mlx-community/whisper-large-v3-mlx-4bit": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--mlx-community--whisper-large-v3-mlx-4bit/snapshots/d12b5d0043a6fe0c59af321617fba041d4e8e0c8",
+      "type": "huggingface",
+      "last_modified": 1749537558.2566679
+    },
+    "openai/whisper-large-v2": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--openai--whisper-large-v2/snapshots/ae4642769ce2ad8fc292556ccea8e901f1530655",
+      "type": "huggingface",
+      "last_modified": 1749479253.815223
+    },
+    "openai/whisper-large-v3": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--openai--whisper-large-v3/snapshots/06f233fe06e710322aca913c1bc4249a0d71fce1",
+      "type": "huggingface",
+      "last_modified": 1749481506.1494787
+    },
+    "openai/whisper-medium": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--openai--whisper-medium/snapshots/abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+      "type": "huggingface",
+      "last_modified": 1749481351.8661373
+    },
+    "t5-base": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--t5-base/snapshots/a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1",
+      "type": "huggingface",
+      "last_modified": 1747751296.0683436
+    },
+    "openai/whisper-base": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--openai--whisper-base/snapshots/e37978b90ca9030d5170a5c07aadb050351a65bb",
+      "type": "huggingface",
+      "last_modified": 1749480770.274642
+    },
+    "AdamCodd/YOLOv11n-face-detection": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--AdamCodd--YOLOv11n-face-detection/snapshots/895c5d8452685fab8ff9e33b28098d926adc90c4",
+      "type": "huggingface",
+      "last_modified": 1748362943.7713614
+    },
+    "openai/whisper-tiny": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--openai--whisper-tiny/snapshots/169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+      "type": "huggingface",
+      "last_modified": 1749481162.260882
+    },
+    "openai/whisper-small": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d",
+      "type": "huggingface",
+      "last_modified": 1749481215.2786002
+    },
+    "facebook/bart-large-cnn": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/37f520fa929c961707657b28798b30c003dd100b",
+      "type": "huggingface",
+      "last_modified": 1747920048.7689297
+    },
+    "sentence-transformers/all-MiniLM-L6-v2": {
+      "cache_path": "/Users/tinosingh/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+      "type": "huggingface",
+      "last_modified": 1747758676.166336
+    }
+  },
+  "warnings": []
+}

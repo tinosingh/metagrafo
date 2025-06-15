@@ -1,31 +1,41 @@
 {
   "environment": {
-    "virtualenv_path": "/Users/tinosingh/Documents/whisper_workspace/W2/whisper",
+    "python_path": "/Users/tinosingh/Documents/whisper_workspace/W3/whisper/bin/python",
     "python_version": "3.11"
   },
-  "paths": {
-    "model_cache_paths": [
-      "/Users/tinosingh/.cache/huggingface/hub",
-      "~/.cache/whisper"
-    ],
-    "log_dir": "logs"
+  "tasks": {
+    "transcription": {
+      "model": "openai/whisper-base",
+      "device": "auto",
+      "language": "en",
+      "fp16": false,
+      "enabled": true
+    },
+    "spellcheck": {
+      "model": "t5-base",
+      "enabled": true
+    },
+    "summarization": {
+      "model": "facebook/bart-large-cnn",
+      "enabled": true,
+      "max_length": 130,
+      "min_length": 30
+    }
   },
-  "defaults": {
-    "model": "large-finnish-v3",
+  "audio": {
     "sample_rate": 16000,
-    "chunk_duration_sec": 1.0,
-    "device": "auto"
+    "chunk_duration_sec": 3.0,
+    "channels": 1,
+    "silence_threshold": 0.03
   },
-  "globals": {
-    "enable_colors": true,
-    "debug_mode": true,
-    "max_retries": 3
+  "debug": {
+    "enabled": true,
+    "log_level": "INFO",
+    "log_file": "logs/transcription.log"
   },
-  "cached_models": {
-    "last_scan": "2025-06-14 19:47:30",
-    "available": [
-      "tiny", "base", "base.en", "small", "medium", "large-v2", "large-v3",
-      "large-finnish-v3"
-    ]
+  "paths": {
+    "cache_dir": "~/.cache/whisper_app",
+    "log_dir": "logs",
+    "output_dir": "output"
   }
 }

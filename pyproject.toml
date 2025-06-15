@@ -1,6 +1,97 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "realtime-transcription"
+version = "0.1.0"
+description = "Real-time audio transcription system with Whisper and additional AI tasks"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+dependencies = [
+    "torch>=2.0.0",
+    "torchaudio>=2.0.0",
+    "openai-whisper>=20230308",
+    "transformers>=4.30.0",
+    "sentencepiece",
+    "pydantic>=2.0.0",
+    "loguru>=0.7.0",
+    "tqdm>=4.65.0",
+    "numpy>=1.24.0",
+    "librosa>=0.10.0",
+    "soundfile>=0.12.1",
+    "sounddevice>=0.4.6",
+    "python-dotenv>=1.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "ruff>=0.0.260",
+    "pre-commit>=3.0.0",
+    "ipython>=8.0.0"
+]
+
 [tool.black]
 line-length = 88
-target-version = ['py311']
+target-version = ['py310']
+include = '\.pyi?$'
 
-[tool.isort]
-profile = 'black'
+[tool.ruff]
+# Enable pycodestyle (E) and pyflakes (F) codes by default
+select = ["E", "F", "I"]
+ignore = []
+
+# Allow autofix for all enabled rules (when `--fix`) is specified.
+fixable = ["ALL"]
+unfixable = []
+
+# Exclude a variety of common directory names.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.isort]
+known-first-party = ["realtime_transcription"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --cov=realtime_transcription --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["realtime_transcription"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 90
+
+[build-system]
+requires = ["setuptools>=42.0", "wheel"]
+build-backend = "setuptools.build_meta"
