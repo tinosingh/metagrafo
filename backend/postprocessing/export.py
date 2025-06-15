@@ -1,7 +1,8 @@
 """Export functionality for transcription results."""
 
-from docx import Document
 import io
+
+from docx import Document
 
 
 def export_to_docx(text: str) -> bytes:

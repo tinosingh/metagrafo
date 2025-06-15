@@ -5,24 +5,25 @@ import logging
 import os
 import tempfile
 
+import mlx.core as mx  # For setting MLX device (important for Apple Silicon)
+
 # Third-party imports
 from fastapi import (
     FastAPI,
-    WebSocket,
-    WebSocketDisconnect,
-    HTTPException,
     File,
     Form,
+    HTTPException,
     UploadFile,
+    WebSocket,
+    WebSocketDisconnect,
 )
 from fastapi.middleware.cors import CORSMiddleware
-import mlx.core as mx  # For setting MLX device (important for Apple Silicon)
 
 # Absolute imports from backend package
 from backend.transcription import (
-    transcribe_audio,
     ALL_WHISPER_MODELS,  # Correctly import ALL_WHISPER_MODELS
 )
+from backend.transcription import transcribe_audio
 from backend.websocket_manager import manager as ws_manager
 
 # Initialize FastAPI app (THIS IS THE 'app' ATTRIBUTE UVICORN LOOKS FOR)
@@ -60,9 +61,9 @@ async def health_check():
         "status": "healthy",
         "details": {
             "api": "running",
-            "websocket": "active"
-            if ws_manager.active_connections_count
-            else "inactive",
+            "websocket": (
+                "active" if ws_manager.active_connections_count else "inactive"
+            ),
         },
     }
 

@@ -1,12 +1,14 @@
 """MLX Whisper transcription with optional WebSocket progress."""
 
+from typing import Optional
+
 import mlx.core as mx
 import mlx_whisper
-from typing import Optional
 
 # WebSocket progress is optional
 try:
     from unittest.mock import patch
+
     from .websocket_manager import TqdmProgressWrapper
 
     HAS_WEBSOCKET = True

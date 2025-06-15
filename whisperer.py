@@ -1,14 +1,15 @@
 """Fixed Real-time macOS transcription with MLX Whisper"""
 
+import os
 import sys
-import time
 import threading
-import numpy as np
-import sounddevice as sd
+import time
+import warnings
 from collections import deque
 from typing import Any, Union
-import warnings
-import os
+
+import numpy as np
+import sounddevice as sd
 
 warnings.filterwarnings("ignore")
 

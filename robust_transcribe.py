@@ -1,10 +1,12 @@
 """Robust real-time transcription with proper MLX memory handling"""
 
-import sounddevice as sd
-import numpy as np
-import mlx.core as mx
 import asyncio
 import time
+
+import mlx.core as mx
+import numpy as np
+import sounddevice as sd
+
 from backend.transcription import transcribe_audio
 
 

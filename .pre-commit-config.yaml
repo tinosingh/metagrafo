@@ -1,0 +1,33 @@
+repos:
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version
+    rev: v0.4.7
+    hooks:
+      # Run the linter
+      - id: ruff
+        # Use the `--fix` flag to automatically fix lint errors
+        args: [--fix, --exit-non-zero-on-fix]
+        types: [python, pyi]
+      # Run the formatter
+      - id: ruff-format
+        args: [--exit-non-zero-on-fix]
+        types: [python, pyi]
+
+-   repo: https://github.com/psf/black
+    rev: 24.4.0
+    hooks:
+    - id: black
+      language_version: python3.10
+
+-   repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.15
+    hooks:
+    - id: validate-pyproject
+
+# Optionally add isort for import sorting
+-   repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+    - id: isort
+      name: isort (python)
+      args: [--profile=black]

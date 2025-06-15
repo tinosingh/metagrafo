@@ -1,4 +1,5 @@
 import base64
+
 import numpy as np
 
 # Read first 10 seconds of audio

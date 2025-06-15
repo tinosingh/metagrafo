@@ -1,6 +1,7 @@
 """Test script for MLX transcription with real audio."""
 
 import asyncio
+
 from mlx_transcribe import transcribe
 
 

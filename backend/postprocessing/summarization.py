@@ -1,12 +1,13 @@
 """Text summarization functionality."""
 
 import logging
-from typing import Optional
-from pydantic import BaseModel, Field
 from enum import Enum
+from typing import Optional
 
-from backend.models import SummaryResult, ProcessingStatus
+from pydantic import BaseModel, Field
+
 from backend.config import SummarizationMode
+from backend.models import ProcessingStatus, SummaryResult
 
 logger = logging.getLogger(__name__)
 

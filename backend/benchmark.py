@@ -1,6 +1,7 @@
 """Module for benchmarking transcription performance."""
 
 import time
+
 from core.model_loader import ModelLoader
 
 

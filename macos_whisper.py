@@ -1,10 +1,10 @@
 """Debugged Real-time macOS transcription with MLX Whisper"""
 
 import sys
-import time
 import threading
-from collections import deque
+import time
 import warnings
+from collections import deque
 
 # Suppress warnings for cleaner output
 warnings.filterwarnings("ignore")

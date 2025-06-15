@@ -1,15 +1,15 @@
 """Audio transcription service using MLX Whisper."""
 
-import os
 import asyncio
 import logging
+import os
 from typing import Optional
 from unittest.mock import patch
 
 import mlx.core as mx
 import mlx_whisper
 
-from .websocket_manager import WebSocketManager, TqdmProgressWrapper
+from .websocket_manager import TqdmProgressWrapper, WebSocketManager
 
 logger = logging.getLogger(__name__)
 manager = WebSocketManager()

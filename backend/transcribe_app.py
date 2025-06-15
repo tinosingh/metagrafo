@@ -1,18 +1,19 @@
 """Streamlit application for audio transcription using Whisper models."""
 
 # Standard library imports
-import os
-import tempfile
-import subprocess
-import re
-from pathlib import Path
 import logging
+import os
+import re
+import subprocess
+import tempfile
 import time
+from pathlib import Path
+
+import mlx.core as mx
+import mlx_whisper.transcribe as mlx_whisper
 
 # Third-party imports
 import streamlit as st
-import mlx.core as mx
-import mlx_whisper.transcribe as mlx_whisper
 
 # Configure MLX to use GPU on Apple Silicon
 mx.set_default_device(mx.Device(mx.DeviceType.gpu))

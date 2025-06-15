@@ -1,9 +1,11 @@
-import sounddevice as sd
-import numpy as np
-from backend.transcription import transcribe_audio
 import asyncio
 import time
 from concurrent.futures import ThreadPoolExecutor
+
+import numpy as np
+import sounddevice as sd
+
+from backend.transcription import transcribe_audio
 
 # Configure audio settings at the top of the file
 default_device = 0  # MacBook Air Microphone

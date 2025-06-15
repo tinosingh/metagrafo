@@ -1,7 +1,9 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
-import sounddevice as sd
+from tkinter import messagebox, ttk
+
 import numpy as np
+import sounddevice as sd
+
 from backend.transcription import transcribe_audio
 
 

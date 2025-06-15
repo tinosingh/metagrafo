@@ -1,8 +1,8 @@
 """Robust macOS transcription with MLX Whisper"""
 
-import sounddevice as sd
 import mlx.core as mx
 import mlx_whisper
+import sounddevice as sd
 
 
 class WhisperTranscriber:

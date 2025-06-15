@@ -1,9 +1,11 @@
 """Optimized macOS transcription based on maeda.pm implementation"""
 
-import sounddevice as sd
-import numpy as np
-import mlx.core as mx
 import asyncio
+
+import mlx.core as mx
+import numpy as np
+import sounddevice as sd
+
 from backend.transcription import transcribe_audio
 
 

@@ -1,11 +1,12 @@
 """Enhanced real-time transcription with VAD and context."""
 
-import numpy as np
-import webrtcvad
 import asyncio
 from typing import Callable, List
+
 import mlx_whisper  # Import MLX-Whisper library
+import numpy as np
 import sounddevice as sd
+import webrtcvad
 
 SAMPLE_RATE = 16000
 CHUNK_SIZE = 0.5  # 500ms chunks for VAD

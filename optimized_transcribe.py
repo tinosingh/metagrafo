@@ -1,11 +1,13 @@
 """Optimized real-time transcription with MLX memory management"""
 
-import sounddevice as sd
-import numpy as np
-import mlx.core as mx
-from backend.transcription import transcribe_audio
 import asyncio
 import time
+
+import mlx.core as mx
+import numpy as np
+import sounddevice as sd
+
+from backend.transcription import transcribe_audio
 
 # Audio configuration
 SAMPLE_RATE = 16000

@@ -1,6 +1,7 @@
 """Test real-time transcription streaming."""
 
 import asyncio
+
 import websockets
 
 
