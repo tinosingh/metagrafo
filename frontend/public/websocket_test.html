@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>WebSocket Audio Streaming Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            min-height: 100px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .connected { color: green; }
+        .disconnected { color: red; }
+    </style>
+</head>
+<body>
+    <h1>WebSocket Audio Streaming Test</h1>
+    
+    <div id="controls">
+        <button id="connectBtn">Connect</button>
+        <button id="startBtn" disabled>Start Streaming</button>
+        <button id="stopBtn" disabled>Stop Streaming</button>
+    </div>
+    
+    <div>
+        <h3>Status:</h3>
+        <div id="status">Disconnected</div>
+    </div>
+    
+    <div>
+        <h3>Transcription:</h3>
+        <div id="transcription"></div>
+    </div>
+    
+    <script>
+        let socket;
+        let mediaRecorder;
+        let audioChunks = [];
+        const clientId = 'test_' + Math.random().toString(36).substr(2, 9);
+        
+        // DOM Elements
+        const connectBtn = document.getElementById('connectBtn');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const statusDiv = document.getElementById('status');
+        const transcriptionDiv = document.getElementById('transcription');
+        
+        // Update status display
+        function updateStatus(message, isError = false) {
+            const statusLine = document.createElement('div');
+            statusLine.textContent = `[${new Date().toISOString()}] ${message}`;
+            if (isError) statusLine.style.color = 'red';
+            statusDiv.appendChild(statusLine);
+            statusDiv.scrollTop = statusDiv.scrollHeight;
+            console.log(message);
+        }
+        
+        // Connect to WebSocket
+        function connectWebSocket() {
+            const wsUrl = `ws://localhost:9001/ws/${clientId}`;
+            updateStatus(`Connecting to ${wsUrl}...`);
+            
+            socket = new WebSocket(wsUrl);
+            
+            socket.onopen = () => {
+                updateStatus('✅ Connected to WebSocket');
+                connectBtn.disabled = true;
+                startBtn.disabled = false;
+                document.body.classList.add('connected');
+                document.body.classList.remove('disconnected');
+            };
+            
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                if (data.type === 'transcription') {
+                    transcriptionDiv.textContent += data.text + ' ';
+                    transcriptionDiv.scrollTop = transcriptionDiv.scrollHeight;
+                }
+                updateStatus(`Received: ${event.data}`);
+            };
+            
+            socket.onclose = () => {
+                updateStatus('❌ Disconnected from WebSocket');
+                connectBtn.disabled = false;
+                startBtn.disabled = true;
+                stopBtn.disabled = true;
+                document.body.classList.remove('connected');
+                document.body.classList.add('disconnected');
+                
+                // Try to reconnect after 3 seconds
+                setTimeout(connectWebSocket, 3000);
+            };
+            
+            socket.onerror = (error) => {
+                updateStatus(`WebSocket error: ${error}`, true);
+            };
+        }
+        
+        // Start audio streaming
+        async function startStreaming() {
+            try {
+                updateStatus('Requesting microphone access...');
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                
+                updateStatus('Initializing audio context...');
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const source = audioContext.createMediaStreamSource(stream);
+                
+                // Create a script processor for audio processing
+                const processor = audioContext.createScriptProcessor(4096, 1, 1);
+                source.connect(processor);
+                processor.connect(audioContext.destination);
+                
+                processor.onaudioprocess = (e) => {
+                    if (socket && socket.readyState === WebSocket.OPEN) {
+                        const audioData = e.inputBuffer.getChannelData(0);
+                        socket.send(audioData.buffer);
+                    }
+                };
+                
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                updateStatus('🎤 Streaming audio... Speak now!');
+                
+                // Store for cleanup
+                mediaRecorder = { stream, audioContext, processor };
+                
+            } catch (error) {
+                updateStatus(`Error accessing microphone: ${error}`, true);
+            }
+        }
+        
+        // Stop audio streaming
+        function stopStreaming() {
+            if (mediaRecorder) {
+                const { stream, audioContext, processor } = mediaRecorder;
+                
+                // Stop all tracks in the stream
+                stream.getTracks().forEach(track => track.stop());
+                
+                // Disconnect audio nodes
+                if (processor) {
+                    processor.disconnect();
+                }
+                if (audioContext && audioContext.state !== 'closed') {
+                    audioContext.close();
+                }
+                
+                mediaRecorder = null;
+            }
+            
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            updateStatus('Stopped streaming');
+        }
+        
+        // Event listeners
+        connectBtn.addEventListener('click', connectWebSocket);
+        startBtn.addEventListener('click', startStreaming);
+        stopBtn.addEventListener('click', stopStreaming);
+        
+        // Initialize
+        updateStatus('Ready to connect');
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[dev]
+  framework = "#custom"
+  target_port = 3000
+  auto_launch = false
+
+[context.development.environment]
+  VITE_WS_URL = "ws://localhost:9001/api/stream"
+
+[context.production.environment]
+  VITE_WS_URL = "wss://your-production-backend.com/api/stream"

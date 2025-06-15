@@ -1,0 +1,11 @@
+# Exclude directories
+exclude = [
+    "node_modules",  # Frontend dependencies
+    "whisper",       # Python virtual environment
+    "backups",       # Backup files
+    "build",         # Build output
+    "**/__pycache__",
+    "**/.pytest_cache",
+    "**/.mypy_cache",
+    "**/*.egg-info"
+]

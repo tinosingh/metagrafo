@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Whisper Transcription Test</title>
+</head>
+<body>
+    <h1>Upload Audio File</h1>
+    <input type="file" id="audio-file" accept="audio/*">
+    <button onclick="upload()">Transcribe</button>
+    <div id="result"></div>
+
+    <script>
+        async function upload() {
+            const fileInput = document.getElementById('audio-file');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select an audio file');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch('http://localhost:9001/transcribe', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Transcription failed');
+                }
+                
+                const result = await response.json();
+                document.getElementById('result').innerText = result.text;
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Transcription failed: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

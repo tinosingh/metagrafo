@@ -1,0 +1,31 @@
+{
+  "environment": {
+    "virtualenv_path": "/Users/tinosingh/Documents/whisper_workspace/W2/whisper",
+    "python_version": "3.11"
+  },
+  "paths": {
+    "model_cache_paths": [
+      "/Users/tinosingh/.cache/huggingface/hub",
+      "~/.cache/whisper"
+    ],
+    "log_dir": "logs"
+  },
+  "defaults": {
+    "model": "large-finnish-v3",
+    "sample_rate": 16000,
+    "chunk_duration_sec": 1.0,
+    "device": "auto"
+  },
+  "globals": {
+    "enable_colors": true,
+    "debug_mode": true,
+    "max_retries": 3
+  },
+  "cached_models": {
+    "last_scan": "2025-06-14 19:47:30",
+    "available": [
+      "tiny", "base", "base.en", "small", "medium", "large-v2", "large-v3",
+      "large-finnish-v3"
+    ]
+  }
+}

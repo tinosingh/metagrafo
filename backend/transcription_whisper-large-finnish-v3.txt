@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Users/tinosingh/Documents/whisper_workspace/W2/backend/core/model_loader.py", line 176, in <module>
+    main()
+  File "/Users/tinosingh/Documents/whisper_workspace/W2/backend/core/model_loader.py", line 166, in main
+    ml = ModelLoader(args.model, fp16=args.fp16)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tinosingh/Documents/whisper_workspace/W2/backend/core/model_loader.py", line 67, in __init__
+    self.model = self._load_model()
+                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/tinosingh/Documents/whisper_workspace/W2/backend/core/model_loader.py", line 103, in _load_model
+    return mlx_whisper.load_models.load_model(str(resolved_dir))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tinosingh/.pyenv/versions/3.11.13/envs/whisper/lib/python3.11/site-packages/mlx_whisper/load_models.py", line 27, in load_model
+    model_args = whisper.ModelDimensions(**config)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ModelDimensions.__init__() got an unexpected keyword argument '_name_or_path'
